@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDiR Maresme - Prueba Gratis</title>
+    
+    <!-- 1. IMPORTAR TAILWIND CSS (Para que se vea el diseño) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. CONFIGURACIÓN DE FUENTES (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- 3. IMPORTAR ICONOS (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configuración de estilos personalizados -->
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, button, .font-title { font-family: 'Montserrat', sans-serif; }
+        /* Color azul BDiR personalizado para Tailwind */
+        .text-bdir-blue { color: #009FE3; }
+        .bg-bdir-blue { background-color: #009FE3; }
+        .border-bdir-blue { border-color: #009FE3; }
+        .hover-bg-bdir-dark:hover { background-color: #007bb0; }
+        .ring-bdir-blue:focus { --tw-ring-color: #009FE3; }
+        
+        /* Animación suave para el scroll */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="min-h-screen bg-white font-sans text-gray-800 antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- --- HERO SECTION --- -->
+    <header class="relative bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                
+                <!-- Decoración SVG de fondo -->
+                <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                    <polygon points="50,0 100,0 50,100 0,100" />
+                </svg>
+
+                <!-- LOGO -->
+                <div class="pt-6 px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-bold tracking-tighter text-bdir-blue font-title">
+                            BDiR <span class="font-light text-gray-500 ml-1">Maresme</span>
+                        </div>
+                    </div>
+                </div>
+
+                <main class="mt-10 mx-auto px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                    <div class="sm:text-center lg:text-left">
+                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                            <span class="block xl:inline">Recupera tu energía.</span>
+                            <span class="block text-bdir-blue xl:inline">Reinvierte en ti.</span>
+                        </h1>
+                        <p class="mt-3 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            El club de fitness en Premià de Dalt diseñado para quienes tienen poco tiempo y buscan calidad. Aparca fácil, entrena a gusto y desconecta del estrés.
+                        </p>
+                        
+                        <!-- Botón Móvil -->
+                        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start lg:hidden">
+                            <a href="#formulario" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-bdir-blue hover-bg-bdir-dark md:py-4 md:text-lg md:px-10 shadow-lg transition-all">
+                                Solicitar Prueba
+                            </a>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- IMAGEN HERO Y CONTENEDOR FORMULARIO (Lado derecho en escritorio) -->
+        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-gray-100 flex items-center justify-center relative h-96 lg:h-auto">
+            <!-- Imagen de fondo -->
+            <div class="absolute inset-0 w-full h-full">
+                <img class="h-full w-full object-cover opacity-90" src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2070&auto=format&fit=crop" alt="Mujer de 45 años sonriendo en el gimnasio">
+                <div class="absolute inset-0 bg-gradient-to-r from-white via-white/20 to-transparent lg:via-transparent"></div>
+            </div>
+
+            <!-- FORMULARIO FLOTANTE -->
+            <div id="formulario" class="relative z-20 w-full max-w-md px-4 py-10 lg:mr-12">
+                <div class="bg-white rounded-xl shadow-2xl p-6 border-t-4 border-bdir-blue">
+                    
+                    <!-- Vista del Formulario -->
+                    <div id="form-view">
+                        <h3 class="text-xl font-bold text-gray-900 text-center mb-2 font-title">
+                            Prueba la experiencia BDiR
+                        </h3>
+                        <p class="text-sm text-gray-600 text-center mb-6">
+                            Déjanos tus datos y te invitamos a probar una sesión de <span class="font-semibold text-bdir-blue">Entrenamiento Personal</span>.
+                        </p>
+                        <form onsubmit="submitForm(event)" class="space-y-4">
+                            <div>
+                                <label for="name" class="sr-only">Nombre y Apellidos</label>
+                                <input type="text" id="name" required placeholder="Nombre y Apellidos" class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue focus:outline-none transition-colors ring-1 ring-transparent focus:ring-2">
+                            </div>
+                            <div>
+                                <label for="phone" class="sr-only">Teléfono Móvil</label>
+                                <input type="tel" id="phone" required placeholder="Teléfono Móvil" class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue focus:outline-none transition-colors ring-1 ring-transparent focus:ring-2">
+                            </div>
+                            <div>
+                                <label for="email" class="sr-only">Correo Electrónico</label>
+                                <input type="email" id="email" required placeholder="Correo Electrónico" class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue focus:outline-none transition-colors ring-1 ring-transparent focus:ring-2">
+                            </div>
+                            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-bdir-blue hover-bg-bdir-dark focus:outline-none focus:ring-2 focus:ring-offset-2 ring-bdir-blue uppercase tracking-wide transition-transform transform hover:scale-105 font-title">
+                                SOLICITAR MI PRUEBA DE EP GRATIS &gt;&gt;
+                            </button>
+                            <p class="text-xs text-center text-gray-400 mt-2">
+                                Tu privacidad es importante. No compartiremos tus datos.
+                            </p>
+                        </form>
+                    </div>
+
+                    <!-- Vista de Éxito (Oculta por defecto) -->
+                    <div id="success-view" class="hidden text-center py-10">
+                        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                            <i data-lucide="check-circle" class="h-8 w-8 text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900 font-title">¡Solicitud Recibida!</h3>
+                        <p class="mt-2 text-sm text-gray-500">
+                            Nos pondremos en contacto contigo muy pronto para agendar tu sesión.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- --- BENEFICIOS SECTION --- -->
+    <section class="py-16 bg-[#F5F5F5]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Tu salud no puede esperar más <br class="hidden sm:block"/>
+                    <span class="text-gray-500 text-2xl font-normal">(y tu agenda lo sabe)</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-50 text-bdir-blue mb-6">
+                        <i data-lucide="clock" class="h-8 w-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 font-title">Eficiencia Máxima</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Sabemos que tu tiempo es oro. Clases dirigidas de 45 minutos, circuitos exprés y vestuarios equipados para que entres y salgas renovado en menos de una hora.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-50 text-bdir-blue mb-6">
+                        <i data-lucide="car" class="h-8 w-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 font-title">Parking y Comodidad</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Olvídate de dar vueltas para aparcar. Ubicación estratégica en Premià de Dalt con facilidad de estacionamiento. Tu entrenamiento empieza sin estrés.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-50 text-bdir-blue mb-6">
+                        <i data-lucide="activity" class="h-8 w-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 font-title">Espalda Sana y Anti-Estrés</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        No somos solo "pesas". Programas de Yoga, Pilates y Espalda Sana diseñados para combatir el sedentarismo de la oficina y recargar pilas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- SOCIAL PROOF / TESTIMONIAL --- -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-lg text-gray-500 font-medium mb-8 italic">
+                "La calidad y garantía del Grupo DiR, con la cercanía y tranquilidad que buscas en el Maresme."
+            </p>
+            
+            <div class="bg-blue-50 rounded-2xl p-8 shadow-inner relative overflow-hidden">
+                <div class="absolute top-0 left-0 opacity-10 transform -translate-x-4 -translate-y-4">
+                    <i data-lucide="star" class="h-32 w-32 text-bdir-blue fill-current"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex justify-center mb-4 space-x-1">
+                        <!-- 5 Estrellas manuales -->
+                        <i data-lucide="star" class="h-6 w-6 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="h-6 w-6 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="h-6 w-6 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="h-6 w-6 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="h-6 w-6 text-yellow-400 fill-current"></i>
+                    </div>
+                    <blockquote class="text-xl text-gray-800 font-medium mb-6">
+                        "Por fin un gimnasio donde no me siento fuera de lugar. Limpio, gente educada y monitores que están por ti. Voy a mediodía y me da la vida."
+                    </blockquote>
+                    <div class="flex items-center justify-center space-x-4">
+                        <div class="h-12 w-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-500 font-bold">
+                            MS
+                        </div>
+                        <div class="text-left">
+                            <div class="font-bold text-gray-900">Marta S.</div>
+                            <div class="text-sm text-gray-500">Premià de Dalt</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- CTA FINAL --- -->
+    <section class="relative py-20 bg-bdir-blue">
+        <div class="absolute inset-0 overflow-hidden">
+             <!-- Decoración abstracta -->
+             <div class="absolute -top-24 -left-24 w-96 h-96 bg-white opacity-10 rounded-full mix-blend-overlay blur-3xl"></div>
+             <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-900 opacity-20 rounded-full mix-blend-overlay blur-3xl"></div>
+        </div>
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">
+                ¿Te vas a dejar para "mañana" otra vez?
+            </h2>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+                Las plazas de esta promoción son limitadas. Ven a conocer el ambiente que te mereces hoy mismo.
+            </p>
+            <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="inline-block bg-white py-4 px-10 border border-transparent rounded-md shadow-lg text-lg font-bold text-bdir-blue hover:bg-gray-50 hover-text-bdir-dark transition-all transform hover:-translate-y-1 uppercase cursor-pointer font-title">
+                QUIERO PROBAR UN ENTRENADOR PERSONAL GRATIS
+            </button>
+        </div>
+    </section>
+
+    <!-- --- FOOTER --- -->
+    <footer class="bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <!-- Footer Logo Update -->
+                    <div class="text-xl font-bold tracking-tighter text-bdir-blue font-title">
+                        BDiR <span class="font-light text-gray-500 ml-1 text-lg">Maresme</span>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-gray-500 text-sm">
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="map-pin" class="h-5 w-5 text-bdir-blue"></i>
+                        <span>Av. Pedrablanca S/N Local 7</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="phone" class="h-5 w-5 text-bdir-blue"></i>
+                        <span>93 754 87 47</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="message-circle" class="h-5 w-5 text-bdir-blue"></i>
+                        <span>682 334 580</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
+                <div class="flex space-x-6 md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-gray-500">Política de Privacidad</a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500">Aviso Legal</a>
+                </div>
+                <p class="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
+                    &copy; 2025 BDiR Maresme. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT SIMPLE (Lógica del formulario) -->
+    <script>
+        // 1. Inicializar Iconos
+        lucide.createIcons();
+
+        // 2. Función de envío del formulario
+        function submitForm(e) {
+            e.preventDefault();
+            
+            // Ocultar formulario y mostrar mensaje de éxito
+            document.getElementById('form-view').classList.add('hidden');
+            document.getElementById('success-view').classList.remove('hidden');
+            
+            // Aquí podrías añadir código para enviar los datos a un servidor real
+            console.log("Formulario enviado");
+        }
+    </script>
+</body>
+</html>
