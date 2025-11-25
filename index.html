@@ -333,8 +333,8 @@
     <!-- JAVASCRIPT: LOGICA + TRADUCCIONES -->
     <script>
         // 2. CONFIGURACIÓN DEL EMAIL (IMPORTANTE)
-        const emailDestino = cm.bdirmaresme@gmail.com; // <--- PON TU EMAIL REAL AQUÍ (ej: info@bdirmaresme.cat)
-
+        const emailDestino = "cm.bdirmaresme@gmail.com"; // <--- Tu email real
+        
         // 3. Diccionario de Traducciones
         const translations = {
             es: {
@@ -501,7 +501,8 @@
             })
             .catch(error => {
                 console.log(error);
-                alert("Hubo un error al enviar. Por favor, inténtalo de nuevo o llámanos.");
+                // Utilizar un mensaje de error dentro de un modal o elemento visible, no alert()
+                document.getElementById('error-message').innerText = "Hubo un error al enviar. Por favor, inténtalo de nuevo o llámanos.";
                 btn.disabled = false;
                 btn.innerHTML = originalText;
             });
