@@ -295,8 +295,8 @@
                         <i data-lucide="phone" class="h-5 w-5 text-bdir-blue"></i>
                         <span>93 754 87 47</span>
                     </div>
-                    <!-- Enlace WhatsApp actualizado -->
-                    <a href="https://wa.me/34682334580?text=Quiero%20mi%20sesion%20de%20prueba%20gratuita%20con%20un%20Entrenador%20Personal" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors group">
+                    <!-- Enlace WhatsApp actualizado con ID para traducción -->
+                    <a id="whatsapp-link-footer" href="https://wa.me/34682334580?text=Quiero%20mi%20sesion%20de%20prueba%20gratuita%20con%20un%20Entrenador%20Personal" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors group">
                         <i data-lucide="message-circle" class="h-5 w-5 text-bdir-blue group-hover:scale-110 transition-transform"></i>
                         <span class="font-semibold">682 334 580</span>
                     </a>
@@ -304,7 +304,7 @@
             </div>
             
             <div class="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
-                <!-- Redes Sociales (Añadido) -->
+                <!-- Redes Sociales (Facebook e Instagram) -->
                 <div class="flex space-x-6 md:order-3 mt-4 md:mt-0 justify-center md:justify-end">
                     <a href="https://www.facebook.com/bdirmaresme/?locale=es_ES" target="_blank" class="text-gray-400 hover:text-bdir-blue transition-colors">
                         <span class="sr-only">Facebook</span>
@@ -332,9 +332,6 @@
 
     <!-- JAVASCRIPT: LOGICA + TRADUCCIONES -->
     <script>
-        // 1. Inicializar Iconos
-        lucide.createIcons();
-
         // 2. CONFIGURACIÓN DEL EMAIL (IMPORTANTE)
         const emailDestino = cm.bdirmaresme@gmail.com; // <--- PON TU EMAIL REAL AQUÍ (ej: info@bdirmaresme.cat)
 
@@ -380,7 +377,8 @@
                 cta_final_btn: "QUIERO PROBAR UN ENTRENADOR PERSONAL GRATIS",
                 footer_privacy: "Política de Privacidad",
                 footer_legal: "Aviso Legal",
-                footer_rights: "&copy; 2025 BDiR Maresme. Todos los derechos reservados."
+                footer_rights: "&copy; 2025 BDiR Maresme. Todos los derechos reservados.",
+                whatsapp_message: "Quiero mi sesion de prueba gratuita con un Entrenador Personal" // Nuevo mensaje en español
             },
             ca: {
                 hero_title_1: "Recupera la teva energia.",
@@ -422,12 +420,14 @@
                 cta_final_btn: "VULL PROVAR UN ENTRENADOR PERSONAL GRATIS",
                 footer_privacy: "Política de Privacitat",
                 footer_legal: "Avís Legal",
-                footer_rights: "&copy; 2025 BDiR Maresme. Tots els drets reservats."
+                footer_rights: "&copy; 2025 BDiR Maresme. Tots els drets reservats.",
+                whatsapp_message: "Vull la meva sessió de prova gratuïta amb un Entrenador Personal" // Nuevo mensaje en catalán
             }
         };
 
         // 4. Función para cambiar el idioma
         function changeLanguage(lang) {
+            // A. Actualizar todos los textos con data-i18n
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -436,6 +436,7 @@
                 }
             });
 
+            // B. Actualizar placeholders
             const inputs = document.querySelectorAll('[data-i18n-placeholder]');
             inputs.forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
@@ -444,7 +445,7 @@
                 }
             });
             
-            // Actualizar opciones del select
+            // C. Actualizar opciones del select
             const options = document.querySelectorAll('option[data-i18n]');
              options.forEach(op => {
                 const key = op.getAttribute('data-i18n');
@@ -453,6 +454,15 @@
                 }
             });
 
+            // D. **NUEVO FIX: Actualizar el enlace de WhatsApp**
+            const whatsappLink = document.getElementById('whatsapp-link-footer');
+            const message = translations[lang]['whatsapp_message'];
+            if (whatsappLink && message) {
+                const encodedMessage = encodeURIComponent(message);
+                whatsappLink.href = `https://wa.me/34682334580?text=${encodedMessage}`;
+            }
+
+            // E. Actualizar botones activos y lang
             document.getElementById('btn-es').classList.toggle('active', lang === 'es');
             document.getElementById('btn-ca').classList.toggle('active', lang === 'ca');
             document.documentElement.lang = lang;
@@ -496,6 +506,15 @@
                 btn.innerHTML = originalText;
             });
         }
+        
+        // 6. INICIALIZACIÓN: Aseguramos que los iconos y el idioma inicial se carguen correctamente
+        document.addEventListener('DOMContentLoaded', () => {
+            // FIX SAFARI: Asegura que Lucide (los iconos) se cargue después de que el DOM esté listo.
+            lucide.createIcons();
+            
+            // Establece el idioma por defecto (ES) y actualiza el enlace de WhatsApp
+            changeLanguage(document.documentElement.lang || 'es');
+        });
     </script>
 </body>
 </html>
