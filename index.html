@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDiR Maresme - Prueba Gratis</title>
+    
     <title id="pageTitle">BDiR Maresme - Prueba Gratis</title>
 
     <!-- 1. IMPORTAR TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
+    
     <!-- 2. CONFIGURACIÓN DE FUENTES: Montserrat (títulos) y Open Sans (cuerpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
 
     <!-- 3. IMPORTAR ICONOS -->
+    <!-- Usamos Lucide para iconos, que incluye el de WhatsApp -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Configuración de estilos personalizados -->
     <style>
         body { font-family: 'Open Sans', sans-serif; }
         h1, h2, h3, h4, button, .font-title { font-family: 'Montserrat', sans-serif; }
+        
 
         /* Color azul BDiR personalizado */
         .text-bdir-blue { color: #009FE3; }
@@ -27,50 +32,78 @@
         .border-bdir-blue { border-color: #009FE3; }
         .hover-bg-bdir-dark:hover { background-color: #007bb0; }
         .ring-bdir-blue:focus { --tw-ring-color: #009FE3; }
+        
 
         /* Estilos para el selector de idioma */
         .lang-btn { cursor: pointer; transition: opacity 0.2s; }
         .lang-btn.active { font-weight: bold; text-decoration: underline; color: #009FE3; }
         .lang-btn:hover { opacity: 0.8; }
+        
 
         /* Loading spinner para el botón */
         .spinner {
             border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
             border-radius: 50%;
-            border-top: 3px solid white;
-            width: 20px;
-            height: 20px;
+            width: 1em;
+            height: 1em;
             animation: spin 1s linear infinite;
             display: inline-block;
+            vertical-align: middle;
             margin-right: 8px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
 
         html { scroll-behavior: smooth; }
         /* Clases de utilidad para el formulario */
         .hidden-view { display: none; }
+
+        /* Estilos para el modal de políticas */
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.75);
+            transition: opacity 0.3s ease-in-out;
+        }
+        .policy-link {
+            transition: color 0.2s;
+        }
+        .policy-link:hover {
+            color: #009FE3; /* Color azul BDiR al pasar el ratón */
+            text-decoration: underline;
+        }
+        
+        /* Aseguramos que el logo de whatsapp se vea correctamente */
+        .whatsapp-icon-wrapper {
+            /* Lucide no tiene el icono de WhatsApp, lo cargamos con un SVG */
+            display: inline-flex;
+            width: 1.25rem; /* h-5 */
+            height: 1.25rem; /* w-5 */
+        }
     </style>
 </head>
 <body class="min-h-screen bg-white font-sans text-gray-800 antialiased selection:bg-blue-100 selection:text-blue-900">
-
-    <!-- --- HERO SECTION --- -->
+    
+    <!-- CONTENIDO PRINCIPAL -->
     <header class="relative bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto">
-            <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+            <!-- NOTA: Se ha aumentado el padding inferior (lg:pb-40 xl:pb-52) para asegurar que la sección de Beneficios (siguiente corte blanco) no corte el formulario. -->
+            <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-40 xl:pb-52">
+                
 
-                <!-- SVG Fondo -->
+                <!-- SVG Fondo (para la transición visual) -->
                 <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                     <polygon points="50,0 100,0 50,100 0,100" />
                 </svg>
 
                 <!-- HEADER SUPERIOR: LOGO + IDIOMAS -->
                 <div class="pt-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-                    <!-- LOGO: Se convierte en un enlace <a> -->
+                    <!-- LOGO: BDiR Maresme (Superior Izquierda) -->
                     <div class="flex items-center">
                         <a href="https://cmbdirmaresme-bot.github.io/landing-bdir-home/#" class="text-2xl font-bold tracking-tighter text-bdir-blue font-title hover:text-[#007bb0] transition-colors">
                             BDiR <span class="font-light text-gray-500 ml-1">Maresme</span>
                         </a>
                     </div>
+                    
 
                     <!-- SELECTOR DE IDIOMA -->
                     <div class="flex space-x-2 text-sm font-semibold text-gray-500 z-50 relative">
@@ -80,28 +113,29 @@
                     </div>
                 </div>
 
-                <main class="mt-10 mx-auto px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-                    <div class="sm:text-center lg:text-left">
-                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                            <span class="block xl:inline" data-i18n="hero_title_1">Recupera tu energía.</span>
-                            <span class="block text-bdir-blue xl:inline" data-i18n="hero_title_2">Reinvierte en ti.</span>
-                        </h1>
-                        <p class="mt-3 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0" data-i18n="hero_subtitle">
-                            El club de fitness en Premià de Dalt diseñado para quienes tienen poco tiempo y buscan calidad. Aparca fácil, entrena a gusto y desconecta del estrés.
-                        </p>
+                <!-- CONTENIDO HERO - CENTRADO EN SU COLUMNA -->
+                <div class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 lg:text-center">
+                    <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                        <span class="block xl:inline text-bdir-blue" data-i18n="hero_title_1">Recupera tu energía.</span>
+                        <span class="block text-gray-900 xl:inline" data-i18n="hero_title_2">Reinvierte en ti.</span>
+                    </h1>
+                    
+                    <p class="mt-3 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl mx-auto md:mt-5 md:text-xl" data-i18n="hero_subtitle">
+                        El club de fitness en Premià de Dalt diseñado para quienes tienen poco tiempo y buscan calidad. Aparca fácil, entrena a gusto y desconecta del estrés.
+                    </p>
+                    
 
-                        <!-- Botón Móvil -->
-                        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start lg:hidden">
-                            <a href="#formulario" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-bdir-blue hover-bg-bdir-dark md:py-4 md:text-lg md:px-10 shadow-lg transition-all" data-i18n="mobile_cta">
-                                Solicitar Prueba
-                            </a>
-                        </div>
+                    <!-- Botón Móvil (centrado en móvil) -->
+                    <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-center lg:hidden">
+                        <a href="#formulario" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-bdir-blue hover-bg-bdir-dark md:py-4 md:text-lg md:px-10 shadow-lg transition-all" data-i18n="mobile_cta">
+                            Solicitar Prueba
+                        </a>
                     </div>
-                </main>
+                </div>
             </div>
         </div>
 
-        <!-- IMAGEN HERO Y CONTENEDOR FORMULARIO -->
+        <!-- IMAGEN + FORMULARIO -->
         <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-gray-100 flex items-center justify-center relative h-96 lg:h-auto">
             <!-- Imagen de fondo -->
             <div class="absolute inset-0 w-full h-full">
@@ -116,6 +150,7 @@
             <!-- FORMULARIO FLOTANTE -->
             <div id="formulario" class="relative z-20 w-full max-w-md px-4 py-10 lg:mr-12">
                 <div class="bg-white rounded-xl shadow-2xl p-6 border-t-4 border-bdir-blue">
+                    
 
                     <!-- Vista del Formulario -->
                     <div id="form-view">
@@ -125,25 +160,30 @@
                         <p class="text-sm text-gray-600 text-center mb-6" data-i18n="form_subtitle">
                             Déjanos tus datos y te invitamos a probar una sesión de <span class="font-semibold text-bdir-blue">Entrenamiento Personal</span>.
                         </p>
-
+                        
                         <!-- FORMULARIO ACTUALIZADO PARA ENVÍO SIMULADO -->
                         <form id="main-form" onsubmit="submitForm(event)" class="space-y-4">
                             <!-- Campos Ocultos de Configuración (para simulación) -->
                             <input type="hidden" name="_subject" value="Nuevo Lead BDiR Maresme - Landing Page">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_template" value="table">
                             <input type="hidden" name="utm_source" value="landing-page-ep">
 
                             <div>
                                 <label for="name" class="sr-only" data-i18n="label_name">Nombre y Apellidos</label>
-                                <input type="text" id="name" name="nombre" required placeholder="Nombre y Apellidos" class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue focus:outline-none transition-colors ring-1 ring-transparent focus:ring-2" data-i18n-placeholder="placeholder_name">
+                                <input id="name" name="nombre" type="text" required placeholder="Nombre y Apellidos" class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-bdir-blue ring-bdir-blue focus:outline-none transition-colors ring-1 ring-transparent focus:ring-2" data-i18n-placeholder="placeholder_name">
                             </div>
+
                             <div>
                                 <label for="phone" class="sr-only" data-i18n="label_phone">Teléfono Móvil</label>
-                                <input type="tel" id="phone" name="telefono" required placeholder="Teléfono Móvil" class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue focus:outline-none transition-colors ring-1 ring-transparent focus:ring-2" data-i18n-placeholder="placeholder_phone">
+                                <input id="phone" name="telefono" type="tel" required placeholder="Teléfono Móvil" class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-bdir-blue ring-bdir-blue focus:outline-none transition-colors ring-1 ring-transparent focus:ring-2" data-i18n-placeholder="placeholder_phone">
                             </div>
+
                             <div>
                                 <label for="email" class="sr-only" data-i18n="label_email">Correo Electrónico</label>
-                                <input type="email" id="email" name="email" required placeholder="Correo Electrónico" class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue focus:outline-none transition-colors ring-1 ring-transparent focus:ring-2" data-i18n-placeholder="placeholder_email">
+                                <input id="email" name="email" type="email" required placeholder="Correo Electrónico" class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-bdir-blue ring-bdir-blue focus:outline-none transition-colors ring-1 ring-transparent focus:ring-2" data-i18n-placeholder="placeholder_email">
                             </div>
+
                             <!-- Preferencia de contacto -->
                             <div>
                                 <label for="contact_preference" class="sr-only" data-i18n="label_contact_pref">Forma de contacto preferida</label>
@@ -155,12 +195,24 @@
                                 </select>
                             </div>
 
-                            <button id="submit-btn" type="submit" class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-bdir-blue hover-bg-bdir-dark focus:outline-none focus:ring-2 focus:ring-offset-2 ring-bdir-blue uppercase tracking-wide transition-transform transform hover:scale-105 font-title">
+                            <!-- Checkbox de Aceptación de Políticas -->
+                            <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                    <input id="accept_policies" name="acepta_politicas" type="checkbox" required class="focus:ring-bdir-blue h-4 w-4 text-bdir-blue border-gray-300 rounded cursor-pointer">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="accept_policies" class="font-medium text-gray-700">
+                                        He leído y acepto la 
+                                        <a href="#" class="policy-link text-bdir-blue hover:text-[#007bb0]" data-policy="privacidad">Política de Privacidad</a>
+                                        y los
+                                        <a href="#" class="policy-link text-bdir-blue hover:text-[#007bb0]" data-policy="legal">Términos Legales</a>.
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button id="submit-btn" type="submit" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-bdir-blue hover-bg-bdir-dark md:py-4 md:text-lg md:px-10 shadow-lg transition-all font-title">
                                 <span data-i18n="form_button">SOLICITAR MI PRUEBA DE EP GRATIS >></span>
                             </button>
-                            <p class="text-xs text-center text-gray-400 mt-2" data-i18n="form_privacy">
-                                Tu privacidad es importante. No compartiremos tus datos.
-                            </p>
                         </form>
                     </div>
 
@@ -179,175 +231,198 @@
         </div>
     </header>
 
-    <!-- --- BENEFICIOS SECTION --- -->
-    <section class="py-16 bg-[#F5F5F5]">
+    <!-- SECCIÓN DE BENEFICIOS -->
+    <section id="beneficios" class="py-16 sm:py-24 lg:py-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                    <span data-i18n="benefits_title_1">Tu salud no puede esperar más</span> <br class="hidden sm:block"/>
-                    <span class="text-gray-500 text-2xl font-normal" data-i18n="benefits_title_2">(y tu agenda lo sabe)</span>
+            <div class="lg:text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl font-title">
+                    <span data-i18n="benefits_title_1">Tu salud no puede esperar más</span>
+                    <span class="block text-bdir-blue mt-1" data-i18n="benefits_title_2">(y tu agenda lo sabe)</span>
                 </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <!-- Feature 1 -->
-                <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-50 text-bdir-blue mb-6">
-                        <i data-lucide="clock" class="h-8 w-8"></i>
+            <div class="mt-20">
+                <div class="space-y-10 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:gap-y-10">
+                    
+                    <!-- Beneficio 1: Eficiencia Máxima -->
+                    <div class="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <i data-lucide="clock" class="h-10 w-10 text-bdir-blue mb-4"></i>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900 font-title" data-i18n="benefit_1_title">Eficiencia Máxima</h3>
+                        <p class="mt-2 text-base text-gray-500" data-i18n="benefit_1_desc">
+                            Sabemos que tu tiempo es oro. Clases dirigidas de 45 minutos, circuitos exprés y vestuarios equipados para que entres y salgas renovado en menos de una hora.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 font-title" data-i18n="benefit_1_title">Eficiencia Máxima</h3>
-                    <p class="text-gray-600 leading-relaxed" data-i18n="benefit_1_desc">
-                        Sabemos que tu tiempo es oro. Clases dirigidas de 45 minutos, circuitos exprés y vestuarios equipados para que entres y salgas renovado en menos de una hora.
-                    </p>
-                </div>
 
-                <!-- Feature 2 -->
-                <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-50 text-bdir-blue mb-6">
-                        <i data-lucide="car" class="h-8 w-8"></i>
+                    <!-- Beneficio 2: Parking y Comodidad -->
+                    <div class="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <i data-lucide="car" class="h-10 w-10 text-bdir-blue mb-4"></i>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900 font-title" data-i18n="benefit_2_title">Parking y Comodidad</h3>
+                        <p class="mt-2 text-base text-gray-500" data-i18n="benefit_2_desc">
+                            Olvídate de dar vueltas para aparcar. Ubicación estratégica en Premià de Dalt con facilidad de estacionamiento. Tu entrenamiento empieza sin estrés.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 font-title" data-i18n="benefit_2_title">Parking y Comodidad</h3>
-                    <p class="text-gray-600 leading-relaxed" data-i18n="benefit_2_desc">
-                        Olvídate de dar vueltas para aparcar. Ubicación estratégica en Premià de Dalt con facilidad de estacionamiento. Tu entrenamiento empieza sin estrés.
-                    </p>
-                </div>
 
-                <!-- Feature 3 -->
-                <div class="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-50 text-bdir-blue mb-6">
-                        <i data-lucide="activity" class="h-8 w-8"></i>
+                    <!-- Beneficio 3: Espalda Sana y Anti-Estrés -->
+                    <div class="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <i data-lucide="leaf" class="h-10 w-10 text-bdir-blue mb-4"></i>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900 font-title" data-i18n="benefit_3_title">Espalda Sana y Anti-Estrés</h3>
+                        <p class="mt-2 text-base text-gray-500" data-i18n="benefit_3_desc">
+                            No somos solo "pesas". Programas de Yoga, Pilates y Espalda Sana diseñados para combatir el sedentarismo de la oficina y recargar pilas.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 font-title" data-i18n="benefit_3_title">Espalda Sana y Anti-Estrés</h3>
-                    <p class="text-gray-600 leading-relaxed" data-i18n="benefit_3_desc">
-                        No somos solo "pesas". Programas de Yoga, Pilates y Espalda Sana diseñados para combatir el sedentarismo de la oficina y recargar pilas.
-                    </p>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- --- SOCIAL PROOF / TESTIMONIAL --- -->
-    <section class="py-16 bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-lg text-gray-500 font-medium mb-8 italic" data-i18n="social_proof_intro">
+    <!-- SECCIÓN TESTIMONIO -->
+    <section id="testimonio" class="bg-bdir-blue py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-lg text-blue-100 font-medium mb-8 italic" data-i18n="social_proof_intro">
                 "La calidad y garantía del Grupo DiR, con la cercanía y tranquilidad que buscas en el Maresme."
             </p>
+            
 
             <div class="bg-blue-50 rounded-2xl p-8 shadow-inner relative overflow-hidden">
                 <div class="absolute top-0 left-0 opacity-10 transform -translate-x-4 -translate-y-4">
                     <i data-lucide="star" class="h-32 w-32 text-bdir-blue fill-current"></i>
                 </div>
                 <div class="relative z-10">
-                    <div class="flex justify-center mb-4 space-x-1">
-                        <i data-lucide="star" class="h-6 w-6 text-yellow-400 fill-current"></i>
-                        <i data-lucide="star" class="h-6 w-6 text-yellow-400 fill-current"></i>
-                        <i data-lucide="star" class="h-6 w-6 text-yellow-400 fill-current"></i>
-                        <i data-lucide="star" class="h-6 w-6 text-yellow-400 fill-current"></i>
-                        <i data-lucide="star" class="h-6 w-6 text-yellow-400 fill-current"></i>
-                    </div>
-                    <blockquote class="text-xl text-gray-800 font-medium mb-6" data-i18n="testimonial_quote">
+                    <i data-lucide="quote" class="h-10 w-10 text-bdir-blue mb-4 mx-auto"></i>
+                    <p class="text-xl italic text-gray-700 max-w-4xl mx-auto" data-i18n="testimonial_quote">
                         "Por fin un gimnasio donde no me siento fuera de lugar. Limpio, gente educada y monitores que están por ti. Voy a mediodía y me da la vida."
-                    </blockquote>
-                    <div class="flex items-center justify-center space-x-4">
-                        <div class="h-12 w-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-500 font-bold">
-                            MS
-                        </div>
-                        <div class="text-left">
-                            <div class="font-bold text-gray-900">Marta S.</div>
-                            <div class="text-sm text-gray-500">Premià de Dalt</div>
-                        </div>
+                    </p>
+                    <div class="mt-6">
+                        <p class="text-base font-semibold text-bdir-blue font-title">Laura G.</p>
+                        <p class="text-sm text-gray-500">Socia BDiR Maresme</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- --- CTA FINAL --- -->
-    <section class="relative py-20 bg-bdir-blue">
-        <div class="absolute inset-0 overflow-hidden">
-             <div class="absolute -top-24 -left-24 w-96 h-96 bg-white opacity-10 rounded-full mix-blend-overlay blur-3xl"></div>
-             <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-900 opacity-20 rounded-full mix-blend-overlay blur-3xl"></div>
-        </div>
-        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6" data-i18n="cta_final_title">
+    <!-- SECCIÓN CTA FINAL -->
+    <section id="cta-final" class="py-16 sm:py-24 lg:py-32 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl font-title" data-i18n="cta_final_title">
                 ¿Te vas a dejar para "mañana" otra vez?
             </h2>
-            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto" data-i18n="cta_final_desc">
+            <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto" data-i18n="cta_final_desc">
                 Las plazas de esta promoción son limitadas. Ven a conocer el ambiente que te mereces hoy mismo.
             </p>
-            <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="inline-block bg-white py-4 px-10 border border-transparent rounded-md shadow-lg text-lg font-bold text-bdir-blue hover:bg-gray-50 hover-text-bdir-dark transition-all transform hover:-translate-y-1 uppercase cursor-pointer font-title" data-i18n="cta_final_btn">
-                QUIERO PROBAR UN ENTRENADOR PERSONAL GRATIS
-            </button>
+            <div class="mt-10 flex justify-center">
+                <a href="#formulario" class="inline-flex items-center justify-center px-10 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-bdir-blue hover-bg-bdir-dark shadow-xl transition-all font-title transform hover:scale-[1.02]">
+                    <span data-i18n="cta_final_btn">QUIERO PROBAR UN ENTRENADOR PERSONAL GRATIS</span>
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- --- FOOTER --- -->
-    <footer class="bg-gray-50 border-t border-gray-200">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center mb-4 md:mb-0">
-                    <div class="text-xl font-bold tracking-tighter text-bdir-blue font-title">
-                        BDiR <span class="font-light text-gray-500 ml-1 text-lg">Maresme</span>
+    <!-- PIE DE PÁGINA (Footer) -->
+    <footer class="bg-gray-800" aria-labelledby="footer-heading">
+        <h2 id="footer-heading" class="sr-only">Footer</h2>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+                <!-- Columna 1: Logo y Contacto -->
+                <div class="space-y-4">
+                    <!-- LOGO: BDiR Maresme (Inferior Izquierda) -->
+                    <div class="text-3xl font-bold tracking-tighter text-white font-title">
+                        BDiR <span class="font-light text-gray-400 ml-1">Maresme</span>
+                    </div>
+                    <div class="flex flex-col space-y-2 text-gray-400">
+                        <!-- ENLACE DE DIRECCIÓN A GOOGLE MAPS -->
+                        <a href="https://maps.google.com/?q=Av.+Pedrablanca+S/N+Local+7,+08390+Premi%C3%A0+de+Dalt" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors group">
+                            <i data-lucide="map-pin" class="h-5 w-5 text-bdir-blue group-hover:scale-110 transition-transform"></i>
+                            <span>Av. Pedrablanca S/N Local 7</span>
+                        </a>
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="phone" class="h-5 w-5 text-bdir-blue"></i>
+                            <span>93 754 87 47</span>
+                        </div>
+                        <!-- WHATSAPP: Se usa data-i18n para el texto "Envíanos un WhatsApp" -->
+                        <a id="whatsapp-link-footer" href="https://wa.me/34682334580?text=Quiero%20mi%20sesion%20de%20prueba%20gratuita%20con%20un%20Entrenador%20Personal" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors group">
+                            <!-- El ícono de WhatsApp ya está aquí, usando Lucide -->
+                            <i data-lucide="whatsapp" class="h-5 w-5 text-bdir-blue group-hover:scale-110 transition-transform"></i>
+                            <span data-i18n="footer_whatsapp_text">Envíanos un WhatsApp (682 33 45 80)</span>
+                        </a>
                     </div>
                 </div>
-                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-gray-500 text-sm">
-                    <!-- ENLACE DE DIRECCIÓN A GOOGLE MAPS -->
-                    <a href="https://maps.google.com/?q=Av.+Pedrablanca+S/N+Local+7,+08390+Premi%C3%A0+de+Dalt" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors group">
-                        <i data-lucide="map-pin" class="h-5 w-5 text-bdir-blue group-hover:scale-110 transition-transform"></i>
-                        <span>Av. Pedrablanca S/N Local 7</span>
-                    </a>
-                    <div class="flex items-center space-x-2">
-                        <i data-lucide="phone" class="h-5 w-5 text-bdir-blue"></i>
-                        <span>93 754 87 47</span>
+
+                <!-- Columna 2: Espacio -->
+                <div class="mt-8 xl:mt-0">
+                    <!-- Espacio intencionalmente vacío o para enlaces futuros -->
+                </div>
+
+                <!-- Columna 3: Avisos Legales y Redes Sociales -->
+                <div class="mt-8 xl:mt-0">
+                    <div class="md:flex md:items-center md:justify-end md:space-x-8">
+                        <!-- Avisos Legales -->
+                        <div class="flex justify-center space-x-6">
+                            <a href="#" class="text-gray-400 text-sm policy-link hover:text-bdir-blue transition-colors" data-i18n="footer_privacy" data-policy="privacidad">Política de Privacidad</a>
+                            <a href="#" class="text-gray-400 text-sm policy-link hover:text-bdir-blue transition-colors" data-i18n="footer_legal" data-policy="legal">Aviso Legal</a>
+                            <a href="#" class="text-gray-400 text-sm policy-link hover:text-bdir-blue transition-colors" data-i18n="footer_cookies" data-policy="cookies">Política de Cookies</a>
+                        </div>
+                        
+                        <!-- Redes Sociales (Facebook e Instagram) -->
+                        <div class="flex space-x-6 mt-4 md:mt-0 justify-center md:justify-end">
+                            <a href="https://www.facebook.com/bdirmaresme/?locale=es_ES" target="_blank" class="text-gray-400 hover:text-bdir-blue transition-colors">
+                                <span class="sr-only">Facebook</span>
+                                <i data-lucide="facebook" class="h-6 w-6"></i>
+                            </a>
+                            <a href="https://www.instagram.com/bdirmaresme/" target="_blank" class="text-gray-400 hover:text-bdir-blue transition-colors">
+                                <span class="sr-only">Instagram</span>
+                                <i data-lucide="instagram" class="h-6 w-6"></i>
+                            </a>
+                        </div>
                     </div>
-                    <!-- Enlace WhatsApp actualizado con ID para traducción -->
-                    <a id="whatsapp-link-footer" href="https://wa.me/34682334580?text=Quiero%20mi%20sesion%20de%20prueba%20gratuita%20con%20un%20Entrenador%20Personal" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors group">
-                        <i data-lucide="message-circle" class="h-5 w-5 text-bdir-blue group-hover:scale-110 transition-transform"></i>
-                        <span class="font-semibold">682 334 580</span>
-                    </a>
                 </div>
             </div>
 
-            <div class="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
-                <!-- Redes Sociales (Facebook e Instagram) -->
-                <div class="flex space-x-6 md:order-3 mt-4 md:mt-0 justify-center md:justify-end">
-                    <!-- Nota: Los iconos de Facebook e Instagram no están en Lucide, pero los usamos con el mismo data-lucide para que no fallen. -->
-                    <a href="https://www.facebook.com/bdirmaresme/?locale=es_ES" target="_blank" class="text-gray-400 hover:text-bdir-blue transition-colors">
-                        <span class="sr-only">Facebook</span>
-                        <i data-lucide="facebook" class="h-6 w-6"></i>
-                    </a>
-                    <a href="https://www.instagram.com/bdirmaresme/?hl=es" target="_blank" class="text-gray-400 hover:text-bdir-blue transition-colors">
-                        <span class="sr-only">Instagram</span>
-                        <i data-lucide="instagram" class="h-6 w-6"></i>
-                    </a>
-                </div>
-
-                <!-- Enlaces Legales -->
-                <div class="flex space-x-6 md:order-2 justify-center mt-4 md:mt-0">
-                    <a href="#" class="text-gray-400 hover:text-gray-500" data-i18n="footer_privacy">Política de Privacidad</a>
-                    <a href="#" class="text-gray-400 hover:text-gray-500" data-i18n="footer_legal">Aviso Legal</a>
-                </div>
-
-                <!-- Copyright -->
-                <p class="mt-8 text-base text-gray-400 md:mt-0 md:order-1 text-center md:text-left" data-i18n="footer_rights">
+            <!-- Copyright -->
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-center text-xs leading-5 text-gray-400" data-i18n="footer_rights">
                     &copy; 2025 BDiR Maresme. Todos los derechos reservados.
                 </p>
             </div>
         </div>
     </footer>
 
+    <!-- MODAL DE POLÍTICAS (Modal para mostrar los textos legales) -->
+    <div id="policyModal" class="fixed inset-0 z-50 hidden modal-overlay items-center justify-center p-4" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-8 transform transition-all duration-300">
+            <div class="flex justify-between items-start border-b pb-3 mb-4">
+                <h3 id="modal-title" class="text-2xl font-bold text-gray-900 font-title"></h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div id="modal-content" class="text-gray-700 space-y-4 text-sm leading-relaxed">
+                <!-- El contenido de la política se insertará aquí -->
+            </div>
+            <div class="mt-6 pt-4 border-t flex justify-end">
+                <button onclick="closeModal()" class="px-6 py-2 text-sm font-medium rounded-lg text-white bg-bdir-blue hover-bg-bdir-dark transition duration-150 shadow-md">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- JAVASCRIPT: LOGICA + TRADUCCIONES -->
     <script>
+        // 1. CONFIGURACIÓN DEL EMAIL (IMPORTANTE): Usaremos un placeholder URL para la simulación
+        const emailDestino = "cm.bdirmaresme@gmail.com"; // <--- Tu email real
+        const FORM_URL = "https://formsubmit.co/ajax/cm.bdirmaresme@gmail.com"; 
+
         // Inicializa los iconos de Lucide
         lucide.createIcons();
-        
-        // 1. CONFIGURACIÓN DEL EMAIL (IMPORTANTE): Usaremos un placeholder URL para la simulación
-        const FORM_URL = "https://formsubmit.co/ajax/cm.bdirmaresme@gmail.com"; 
         
         // 2. Variable de idioma global
         let currentLang = localStorage.getItem('selectedLang') || 'es';
 
-        // 3. Diccionario de Traducciones
+        // 3. Diccionario de Traducciones (actualizado con 'footer_whatsapp_text')
         const translations = {
             es: {
                 pageTitle: 'BDiR Maresme - Prueba Gratis',
@@ -369,6 +444,7 @@
                 option_whatsapp: 'WhatsApp',
                 option_email: 'Email',
                 form_button: 'SOLICITAR MI PRUEBA DE EP GRATIS >>',
+                form_sending: 'ENVIANDO...',
                 form_privacy: 'Tu privacidad es importante. No compartiremos tus datos.',
                 success_title: '¡Solicitud Recibida!',
                 success_msg: 'Nos pondremos en contacto contigo muy pronto para agendar tu sesión.',
@@ -389,6 +465,8 @@
                 cta_final_btn: 'QUIERO PROBAR UN ENTRENADOR PERSONAL GRATIS',
                 footer_privacy: 'Política de Privacidad',
                 footer_legal: 'Aviso Legal',
+                footer_cookies: 'Política de Cookies', // Agregado para el modal
+                footer_whatsapp_text: 'Envíanos un WhatsApp (682 33 45 80)', // Nuevo texto
                 footer_rights: '&copy; 2025 BDiR Maresme. Todos los derechos reservados.',
                 whatsapp_text: 'Quiero mi sesion de prueba gratuita con un Entrenador Personal'
             },
@@ -412,6 +490,7 @@
                 option_whatsapp: 'WhatsApp',
                 option_email: 'Email',
                 form_button: 'SOL·LICITAR LA MEVA PROVA D\'EP GRATUÏTA >>',
+                form_sending: 'ENVIANT...',
                 form_privacy: 'La teva privadesa és important. No compartirem les teves dades.',
                 success_title: 'Sol·licitud Rebuda!',
                 success_msg: 'Ens posarem en contacte amb tu molt aviat per agendar la teva sessió.',
@@ -432,10 +511,111 @@
                 cta_final_btn: 'VULL PROVAR UN ENTRENADOR PERSONAL GRATUÏT',
                 footer_privacy: 'Política de Privadesa',
                 footer_legal: 'Avís Legal',
+                footer_cookies: 'Política de Cookies', // Agregado para el modal
+                footer_whatsapp_text: 'Envia\'ns un WhatsApp (682 33 45 80)', // Nuevo texto
                 footer_rights: '&copy; 2025 BDiR Maresme. Tots els drets reservats.',
                 whatsapp_text: 'Vull la meva sessió de prova gratuïta amb un Entrenador Personal'
             }
         };
+
+
+        // --- LÓGICA DE POLÍTICAS Y MODAL (REINCORPORADA) ---
+
+        // IMPORTANTE: DEBES EDITAR ESTOS TEXTOS CON LA INFORMACIÓN REAL Y LEGAL DE TU EMPRESA.
+        const policies = {
+            privacidad: {
+                title: "Política de Privacidad",
+                content: `
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Política de Privacidad de BDiR Maresme</h4>
+                    
+                    <p class="font-bold">1. Responsable del Tratamiento</p>
+                    <p>La entidad responsable del tratamiento de sus datos es **[Nombre de la Empresa o Persona Física, ejemplo: BDiR Maresme S.L.]**, con NIF/CIF **[Tu NIF/CIF]** y domicilio en **[Tu dirección completa]**.
+                    Para cualquier consulta, puede contactarnos en el correo electrónico: **[Tu Email de Contacto Legal, ejemplo: legal@bdirmaresme.com]**.</p>
+                    
+                    <p class="font-bold">2. Datos Recabados y Finalidad</p>
+                    <p>Los datos recabados a través de formularios (nombre, email, teléfono) tienen como finalidad exclusiva la **gestión de la solicitud de información o contacto comercial** (sesión de prueba) iniciada por el usuario. También podrán ser utilizados para el envío de comunicaciones comerciales relativas a nuestros servicios, si el usuario ha dado su consentimiento expreso.</p>
+                    
+                    <p class="font-bold">3. Base Legal para el Tratamiento</p>
+                    <p>La base legal para el tratamiento es el **consentimiento** del interesado al rellenar y enviar el formulario (Art. 6.1.a del RGPD).</p>
+                    
+                    <p class="font-bold">4. Derechos del Usuario</p>
+                    <p>Usted tiene derecho a ejercer sus derechos de Acceso, Rectificación, Supresión, Oposición, Limitación del Tratamiento y Portabilidad. Puede ejercer estos derechos enviando un correo a **[Tu Email de Contacto Legal]** adjuntando copia de su DNI.</p>
+                `
+            },
+            legal: {
+                title: "Aviso Legal",
+                content: `
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Aviso Legal de BDiR Maresme</h4>
+
+                    <p class="font-bold">1. Datos Identificativos del Titular</p>
+                    <p>En cumplimiento con el deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se informa de:</p>
+                    <ul>
+                        <li><span class="font-semibold">Titular del Sitio Web:</span> **[Nombre de la Empresa o Persona Física]**</li>
+                        <li><span class="font-semibold">NIF/CIF:</span> **[Tu NIF/CIF]**</li>
+                        <li><span class="font-semibold">Domicilio Social:</span> **[Tu dirección completa]**</li>
+                        <li><span class="font-semibold">Correo Electrónico:</span> **[Tu Email de Contacto]**</li>
+                        <li><span class="font-semibold">Actividad:</span> **[Tu actividad principal, ejemplo: Gestión de centros deportivos y fitness]**</li>
+                    </ul>
+                    <p class="font-bold">2. Propiedad Intelectual e Industrial</p>
+                    <p>BDiR Maresme, por sí o como cesionaria, es titular de todos los derechos de propiedad intelectual e industrial del sitio web.</p>
+                    <p class="font-bold">3. Exclusión de Garantías y Responsabilidad</p>
+                    <p>BDiR Maresme no se hace responsable de los daños y perjuicios que pudieran ocasionar, a título enunciativo: errores u omisiones en los contenidos, falta de disponibilidad del portal o la transmisión de virus o programas maliciosos en los contenidos.</p>
+                `
+            },
+            cookies: {
+                title: "Política de Cookies",
+                content: `
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Política de Cookies de BDiR Maresme</h4>
+
+                    <p class="font-bold">1. ¿Qué son las Cookies?</p>
+                    <p>Una cookie es un pequeño fichero de texto que se descarga en el equipo del usuario al acceder a determinadas páginas web. Permiten almacenar y recuperar información sobre los hábitos de navegación de un usuario.</p>
+                    
+                    <p class="font-bold">2. Cookies Utilizadas</p>
+                    <p>Este sitio web utiliza o podría utilizar:</p>
+                    <ul class="list-disc ml-6">
+                        <li><span class="font-semibold">Cookies técnicas:</span> Necesarias para el correcto funcionamiento de la web.</li>
+                        <li><span class="font-semibold">Cookies de análisis:</span> Permiten cuantificar el número de usuarios y medir la actividad de la web (ej. si se usa Google Analytics).</li>
+                    </ul>
+                    
+                    <p class="font-bold">3. Consentimiento y Desactivación</p>
+                    <p>Al navegar, usted acepta el uso de las cookies en las condiciones contenidas en esta Política. Puede revocar el consentimiento y modificar la configuración de las cookies en cualquier momento a través de la configuración de su navegador.</p>
+                `
+            }
+        };
+
+        const modal = document.getElementById('policyModal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+
+        // Función para abrir el modal y cargar la política
+        function openModal(policyType) {
+            const policy = policies[policyType];
+            if (policy) {
+                modalTitle.textContent = policy.title;
+                modalContent.innerHTML = policy.content;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                // Asegurar que se haga scroll al inicio del modal
+                const modalInner = document.querySelector('#policyModal > div');
+                if (modalInner) modalInner.scrollTop = 0;
+            }
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // Listener para capturar los clics en los enlaces del footer y el formulario
+        document.querySelectorAll('.policy-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); // Evita que la página navegue al #
+                const policyType = this.getAttribute('data-policy');
+                openModal(policyType);
+            });
+        });
+
 
         // 4. Lógica de Traducción
         function applyTranslations(lang) {
@@ -451,7 +631,7 @@
                     element.innerHTML = t[key];
                 }
             });
-
+            
             // Atributos data-i18n-placeholder (placeholders)
             document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
                 const key = element.getAttribute('data-i18n-placeholder');
@@ -498,19 +678,20 @@
             const form = document.getElementById('main-form');
             const btn = document.getElementById('submit-btn');
             const originalText = translations[currentLang].form_button;
-            
+
             // Ocultar vistas de mensaje anteriores y preparar formulario
             document.getElementById('message-view').classList.add('hidden-view');
             document.getElementById('form-view').classList.remove('hidden-view');
 
             // 1. Mostrar estado de carga
+            const sendingText = currentLang === 'ca' ? translations.ca.form_sending : translations.es.form_sending;
             btn.disabled = true;
-            btn.innerHTML = `<span class="spinner"></span> <span data-i18n="loading">${currentLang === 'es' ? 'ENVIANDO...' : 'ENVIANT...'}</span>`;
+            btn.innerHTML = `<span class="spinner"></span> <span>${sendingText}</span>`;
 
             // 2. Recolectar datos del formulario
             const formData = new FormData(form);
             const formObject = Object.fromEntries(formData.entries());
-            
+
             // Añadir campos ocultos necesarios para FormSubmit
             formObject['_subject'] = 'Nuevo Lead BDiR Maresme - Landing Page';
             formObject['_captcha'] = 'false';
@@ -545,11 +726,11 @@
             } finally {
                 // Restablecer el botón
                 btn.disabled = false;
-                btn.innerHTML = `<span data-i18n="form_button">${translations[currentLang].form_button}</span>`;
+                btn.innerHTML = `<span data-i18n="form_button">${originalText}</span>`;
                 lucide.createIcons();
             }
         }
-        
+
         function showSuccess() {
             const t = translations[currentLang];
             const messageView = document.getElementById('message-view');
@@ -569,6 +750,12 @@
             document.getElementById('message-title').textContent = t.success_title;
             document.getElementById('message-text').textContent = t.success_msg;
             lucide.createIcons();
+
+            // Devolver al formulario después de 5 segundos
+            setTimeout(() => {
+                document.getElementById('form-view').classList.remove('hidden-view');
+                messageView.classList.add('hidden-view');
+            }, 5000);
         }
 
         function showError() {
@@ -590,7 +777,7 @@
             document.getElementById('message-title').textContent = t.error_title;
             document.getElementById('message-text').textContent = t.error_msg;
             lucide.createIcons();
-            
+
             // Devolver al formulario después de 5 segundos
             setTimeout(() => {
                 document.getElementById('form-view').classList.remove('hidden-view');
@@ -603,6 +790,8 @@
         window.onload = function() {
             // Aplicar el idioma guardado o el idioma por defecto
             changeLanguage(currentLang);
+            // Asegurarse de que los iconos de Lucide se rendericen después de la carga inicial.
+            lucide.createIcons();
         }
     </script>
 </body>
