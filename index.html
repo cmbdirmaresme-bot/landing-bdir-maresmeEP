@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE TML>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -698,11 +698,7 @@
             formObject['_template'] = 'table';
 
             try {
-                // Simulación de una llamada fetch a un endpoint (con 1.5s de delay)
-                await new Promise(resolve => setTimeout(resolve, 1500)); 
-                
-                // En un entorno real, usarías:
-                /*
+                // *** CORRECCIÓN: CAMBIADO DE MODO SIMULACIÓN A ENVÍO REAL A FORMSUBMIT ***
                 const response = await fetch(FORM_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -711,17 +707,15 @@
                 
                 if (response.ok) {
                     showSuccess();
+                    form.reset(); // Limpiar formulario solo si el envío es exitoso
                 } else {
+                    // Si FormSubmit devuelve un error (ej. campo mal rellenado o API error)
                     showError();
                 }
-                */
-
-                // Simulación de éxito (reemplazar con la lógica de respuesta real)
-                showSuccess(); 
-                form.reset();
+                // *** FIN DE CORRECCIÓN ***
 
             } catch (error) {
-                console.error("Error en el envío simulado:", error);
+                console.error("Error en el envío:", error);
                 showError();
             } finally {
                 // Restablecer el botón
