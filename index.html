@@ -5,34 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">BDiR Maresme - Prueba Gratis</title>
 
-    <!-- 1. IMPORTAR TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- 2. CONFIGURACIÓN DE FUENTES: Montserrat (títulos) y Open Sans (cuerpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
-    <!-- 3. IMPORTAR ICONOS -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         body { font-family: 'Open Sans', sans-serif; }
         h1, h2, h3, h4, button, .font-title { font-family: 'Montserrat', sans-serif; }
 
-        /* Color azul BDiR personalizado */
         .text-bdir-blue { color: #009FE3; }
         .bg-bdir-blue { background-color: #009FE3; }
         .border-bdir-blue { border-color: #009FE3; }
         .hover-bg-bdir-dark:hover { background-color: #007bb0; }
         .ring-bdir-blue:focus { --tw-ring-color: #009FE3; }
 
-        /* Estilos para el selector de idioma */
         .lang-btn { cursor: pointer; transition: opacity 0.2s; }
         .lang-btn.active { font-weight: bold; text-decoration: underline; color: #009FE3; }
         .lang-btn:hover { opacity: 0.8; }
 
-        /* Loading spinner para el botón */
         .spinner {
             border: 3px solid rgba(255,255,255,0.3);
             border-top-color: #fff;
@@ -46,10 +40,18 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236B7280'%3e%3cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
         html { scroll-behavior: smooth; }
         .hidden-view { display: none; }
 
-        /* Estilos para el modal de políticas */
         .modal-overlay {
             background-color: rgba(0, 0, 0, 0.75);
             transition: opacity 0.3s ease-in-out;
@@ -59,20 +61,6 @@
             color: #009FE3;
             text-decoration: underline;
         }
-
-        .whatsapp-icon-wrapper {
-            display: inline-flex;
-            width: 1.25rem;
-            height: 1.25rem;
-        }
-
-        /* Estilos para inputs deshabilitados (gris) */
-        .input-disabled {
-            background-color: #f3f4f6; /* tailwind bg-gray-100 */
-            color: #9ca3af; /* tailwind text-gray-400 */
-            cursor: not-allowed;
-            border-color: #e5e7eb; /* tailwind border-gray-200 */
-        }
     </style>
 </head>
 <body class="min-h-screen bg-white font-sans text-gray-800 antialiased selection:bg-blue-100 selection:text-blue-900">
@@ -81,7 +69,7 @@
     <header class="relative bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto">
             <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-40 xl:pb-52">
-                <!-- SVG Fondo (para la transición visual) -->
+                <!-- SVG Fondo -->
                 <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                     <polygon points="50,0 100,0 50,100 0,100" />
                 </svg>
@@ -113,7 +101,7 @@
                     </p>
 
                     <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-center lg:hidden">
-                        <a href="#formulario" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-bdir-blue hover-bg-bdir-dark transition-shadow shadow-sm">
+                        <a href="#formulario" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-bdir-blue hover-bg-bdir-dark transition-colors">
                             <span data-i18n="mobile_cta">Solicitar Prueba</span>
                         </a>
                     </div>
@@ -146,57 +134,62 @@
                         
                         <!-- FORMULARIO ACTUALIZADO -->
                         <form id="main-form" onsubmit="submitForm(event)" class="space-y-4">
-                            <!-- Campos Ocultos de Configuración -->
+                            <!-- Campos Ocultos -->
                             <input type="hidden" name="_subject" value="Nuevo Lead BDiR Maresme - Landing Page">
                             <input type="hidden" name="_captcha" value="false">
                             <input type="hidden" name="_template" value="table">
                             <input type="hidden" name="utm_source" value="landing-page-ep">
 
-                            <!-- 1) SELECT: Forma de contacto preferida (AHORA PRIMERO) -->
-                            <div>
-                                <label for="contact_preference" class="sr-only" data-i18n="label_contact_pref">Forma de contacto preferida</label>
-                                <select id="contact_preference" name="preferencia_contacto" required class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue">
-                                    <option value="" disabled selected data-i18n="placeholder_contact_pref">¿Cómo prefieres que te contactemos?</option>
-                                    <option value="phone" data-i18n="option_phone">Llamada telefónica</option>
-                                    <option value="whatsapp" data-i18n="option_whatsapp">WhatsApp</option>
-                                    <option value="email" data-i18n="option_email">Email</option>
+                            <!-- PASO 1: SELECT DE MÉTODO DE CONTACTO (SIEMPRE VISIBLE) -->
+                            <div class="space-y-2">
+                                <label for="contact_method" class="block text-sm font-semibold text-gray-700" data-i18n="label_contact_pref">
+                                    ¿Cómo prefieres que te contactemos?
+                                </label>
+                                <select id="contact_method" name="metodo_contacto" required onchange="updateContactFields(this.value)" class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue focus:outline-none transition">
+                                    <option value="">-- Selecciona una opción --</option>
+                                    <option value="Telefono" data-i18n="option_phone">Teléfono</option>
+                                    <option value="WhatsApp" data-i18n="option_whatsapp">WhatsApp</option>
+                                    <option value="Email" data-i18n="option_email">Email</option>
                                 </select>
                             </div>
 
-                            <!-- 2) NOMBRE (deshabilitado hasta seleccionar) -->
-                            <div>
-                                <label for="name" class="sr-only" data-i18n="label_name">Nombre</label>
-                                <input id="name" name="nombre" type="text" placeholder="Nombre" class="block w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-3 text-gray-400 focus:outline-none" disabled>
+                            <!-- PASO 2: NOMBRE (APARECE CUANDO SELECCIONA) -->
+                            <div id="fieldNombre" class="hidden">
+                                <label for="nombre" class="block text-sm font-semibold text-gray-700">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" 
+                                       class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue focus:outline-none transition">
                             </div>
 
-                            <!-- 3) TELEFONO MOVIL (deshabilitado hasta seleccionar phone/whatsapp) -->
-                            <div>
-                                <label for="phone" class="sr-only" data-i18n="label_phone">Teléfono Móvil</label>
-                                <input id="phone" name="telefono" type="tel" placeholder="Teléfono Móvil" class="block w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-3 text-gray-400 focus:outline-none" disabled>
+                            <!-- PASO 3A: TELÉFONO (SI ELIGE TELÉFONO O WHATSAPP) -->
+                            <div id="fieldTelefono" class="hidden">
+                                <label for="telefono" class="block text-sm font-semibold text-gray-700">Teléfono Móvil</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="Ej: 93 123 45 67" 
+                                       class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue focus:outline-none transition">
                             </div>
 
-                            <!-- 4) EMAIL (deshabilitado hasta seleccionar email) -->
-                            <div>
-                                <label for="email" class="sr-only" data-i18n="label_email">Correo Electrónico</label>
-                                <input id="email" name="email" type="email" placeholder="Correo Electrónico" class="block w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-3 text-gray-400 focus:outline-none" disabled>
+                            <!-- PASO 3B: EMAIL (SI ELIGE EMAIL) -->
+                            <div id="fieldEmail" class="hidden">
+                                <label for="email" class="block text-sm font-semibold text-gray-700">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" placeholder="tu@email.com" 
+                                       class="block w-full rounded-md border-gray-300 bg-gray-50 border px-4 py-3 text-gray-900 focus:border-bdir-blue focus:ring-bdir-blue focus:outline-none transition">
                             </div>
 
                             <!-- Checkbox de Aceptación de Políticas -->
-                            <div class="flex items-start">
+                            <div class="flex items-start pt-2">
                                 <div class="flex items-center h-5">
                                     <input id="accept_policies" name="acepta_politicas" type="checkbox" required class="focus:ring-bdir-blue h-4 w-4 text-bdir-blue border-gray-300 rounded cursor-pointer">
                                 </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="accept_policies" class="font-medium text-gray-700">
+                                <div class="ml-3 text-xs leading-5">
+                                    <label for="accept_policies" class="font-medium text-gray-600">
                                         He leído y acepto la 
-                                        <a href="#" class="policy-link text-bdir-blue hover:text-[#007bb0]" data-policy="privacidad">Política de Privacidad</a>
+                                        <a href="#" onclick="openModal('privacidad'); return false;" class="policy-link text-bdir-blue hover:text-[#007bb0]">Política de Privacidad</a>
                                         y los
-                                        <a href="#" class="policy-link text-bdir-blue hover:text-[#007bb0]" data-policy="legal">Términos Legales</a>.
+                                        <a href="#" onclick="openModal('legal'); return false;" class="policy-link text-bdir-blue hover:text-[#007bb0]">Términos Legales</a>.
                                     </label>
                                 </div>
                             </div>
                             
-                            <button id="submit-btn" type="submit" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-bdir-blue hover-bg-bdir-dark transition-shadow shadow-sm">
+                            <button id="submit-btn" type="submit" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-bdir-blue hover:bg-[#007bb0] transition-colors">
                                 <span data-i18n="form_button">SOLICITAR MI PRUEBA DE EP GRATIS >></span>
                             </button>
                         </form>
@@ -214,7 +207,6 @@
         </div>
     </header>
 
-    <!-- (resto del documento unchanged...) -->
     <!-- SECCIÓN DE BENEFICIOS -->
     <section id="beneficios" class="py-16 sm:py-24 lg:py-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -291,14 +283,14 @@
                 Las plazas de esta promoción son limitadas. Ven a conocer el ambiente que te mereces hoy mismo.
             </p>
             <div class="mt-10 flex justify-center">
-                <a href="#formulario" class="inline-flex items-center justify-center px-10 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-bdir-blue hover-bg-bdir-dark shadow-sm">
+                <a href="#formulario" class="inline-flex items-center justify-center px-10 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-bdir-blue hover:bg-[#007bb0] shadow-lg transition-colors">
                     <span data-i18n="cta_final_btn">QUIERO PROBAR UN ENTRENADOR PERSONAL GRATIS</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- PIE DE PÁGINA (Footer) -->
+    <!-- PIE DE PÁGINA -->
     <footer class="bg-gray-800" aria-labelledby="footer-heading">
         <h2 id="footer-heading" class="sr-only">Footer</h2>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -308,7 +300,7 @@
                         BDiR <span class="font-light text-gray-400 ml-1">Maresme</span>
                     </div>
                     <div class="flex flex-col space-y-2 text-gray-400">
-                        <a href="https://maps.google.com/?q=Av.+Pedrablanca+S/N+Local+7,+08390+Premi%C3%A0+de+Dalt" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors">
+                        <a href="https://maps.google.com/?q=Av.+Pedrablanca+S/N+Local+7,+08390+Premi%C3%A0+de+Dalt" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors group">
                             <i data-lucide="map-pin" class="h-5 w-5 text-bdir-blue group-hover:scale-110 transition-transform"></i>
                             <span>Av. Pedrablanca S/N Local 7</span>
                         </a>
@@ -316,7 +308,7 @@
                             <i data-lucide="phone" class="h-5 w-5 text-bdir-blue"></i>
                             <span>93 754 87 47</span>
                         </div>
-                        <a id="whatsapp-link-footer" href="https://wa.me/34682334580?text=Quiero%20mi%20sesion%20de%20prueba%20gratuita%20con%20un%20Entrenador%20Personal" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors">
+                        <a id="whatsapp-link-footer" href="https://wa.me/34682334580?text=Quiero%20mi%20sesion%20de%20prueba%20gratuita%20con%20un%20Entrenador%20Personal" target="_blank" class="flex items-center space-x-2 hover:text-bdir-blue transition-colors group">
                             <i data-lucide="whatsapp" class="h-5 w-5 text-bdir-blue group-hover:scale-110 transition-transform"></i>
                             <span data-i18n="footer_whatsapp_text">Envíanos un WhatsApp (682 33 45 80)</span>
                         </a>
@@ -328,9 +320,9 @@
                 <div class="mt-8 xl:mt-0">
                     <div class="md:flex md:items-center md:justify-end md:space-x-8">
                         <div class="flex justify-center space-x-6">
-                            <a href="#" class="text-gray-400 text-sm policy-link hover:text-bdir-blue transition-colors" data-i18n="footer_privacy" data-policy="privacidad">Política de Privacidad</a>
-                            <a href="#" class="text-gray-400 text-sm policy-link hover:text-bdir-blue transition-colors" data-i18n="footer_legal" data-policy="legal">Aviso Legal</a>
-                            <a href="#" class="text-gray-400 text-sm policy-link hover:text-bdir-blue transition-colors" data-i18n="footer_cookies" data-policy="cookies">Política de Cookies</a>
+                            <a href="#" onclick="openModal('privacidad'); return false;" class="text-gray-400 text-sm policy-link hover:text-bdir-blue transition-colors" data-i18n="footer_privacy">Política de Privacidad</a>
+                            <a href="#" onclick="openModal('legal'); return false;" class="text-gray-400 text-sm policy-link hover:text-bdir-blue transition-colors" data-i18n="footer_legal">Aviso Legal</a>
+                            <a href="#" onclick="openModal('cookies'); return false;" class="text-gray-400 text-sm policy-link hover:text-bdir-blue transition-colors" data-i18n="footer_cookies">Política de Cookies</a>
                         </div>
                         
                         <div class="flex space-x-6 mt-4 md:mt-0 justify-center md:justify-end">
@@ -368,20 +360,18 @@
             </div>
             <div id="modal-content" class="text-gray-700 space-y-4 text-sm leading-relaxed"></div>
             <div class="mt-6 pt-4 border-t flex justify-end">
-                <button onclick="closeModal()" class="px-6 py-2 text-sm font-medium rounded-lg text-white bg-bdir-blue hover-bg-bdir-dark transition duration-150 shadow-md">
+                <button onclick="closeModal()" class="px-6 py-2 text-sm font-medium rounded-lg text-white bg-bdir-blue hover:bg-[#007bb0] transition duration-150 shadow-md">
                     Cerrar
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT: LOGICA + TRADUCCIONES -->
+    <!-- JAVASCRIPT COMPLETO -->
     <script>
-        // CONFIGURACIÓN DEL EMAIL (placeholder)
         const emailDestino = "cm.bdirmaresme@gmail.com";
         const FORM_URL = "https://formsubmit.co/ajax/cm.bdirmaresme@gmail.com"; 
 
-        // Inicializa los iconos de Lucide
         lucide.createIcons();
         
         let currentLang = localStorage.getItem('selectedLang') || 'es';
@@ -395,15 +385,9 @@
                 mobile_cta: 'Solicitar Prueba',
                 form_title: 'Prueba la experiencia BDiR',
                 form_subtitle: 'Déjanos tus datos y te invitamos a probar una sesión de <span class="font-semibold text-bdir-blue">Entrenamiento Personal</span>.',
-                label_name: 'Nombre y Apellidos',
-                placeholder_name: 'Nombre y Apellidos',
-                label_phone: 'Teléfono Móvil',
-                placeholder_phone: 'Teléfono Móvil',
-                label_email: 'Correo Electrónico',
-                placeholder_email: 'Correo Electrónico',
-                label_contact_pref: 'Forma de contacto preferida',
-                placeholder_contact_pref: '¿Cómo prefieres que te contactemos?',
-                option_phone: 'Llamada telefónica',
+                label_contact_pref: '¿Cómo prefieres que te contactemos?',
+                placeholder_contact_pref: '-- Selecciona una opción --',
+                option_phone: 'Teléfono',
                 option_whatsapp: 'WhatsApp',
                 option_email: 'Email',
                 form_button: 'SOLICITAR MI PRUEBA DE EP GRATIS >>',
@@ -441,15 +425,9 @@
                 mobile_cta: 'Sol·licitar Prova',
                 form_title: 'Prova l\'experiència BDiR',
                 form_subtitle: 'Deixa\'ns les teves dades i et convidem a provar una sessió d\'<span class="font-semibold text-bdir-blue">Entrenament Personal</span>.',
-                label_name: 'Nom i Cognoms',
-                placeholder_name: 'Nom i Cognoms',
-                label_phone: 'Telèfon Mòbil',
-                placeholder_phone: 'Telèfon Mòbil',
-                label_email: 'Correu Electrònic',
-                placeholder_email: 'Correu Electrònic',
-                label_contact_pref: 'Forma de contacte preferida',
-                placeholder_contact_pref: 'Com prefereixes que et contactem?',
-                option_phone: 'Trucada telefònica',
+                label_contact_pref: 'Com prefereixes que et contactem?',
+                placeholder_contact_pref: '-- Selecciona una opció --',
+                option_phone: 'Telèfon',
                 option_whatsapp: 'WhatsApp',
                 option_email: 'Email',
                 form_button: 'SOL·LICITAR LA MEVA PROVA D\'EP GRATUÏTA >>',
@@ -481,19 +459,18 @@
             }
         };
 
-        // POLÍTICAS (sin cambios)
         const policies = {
             privacidad: {
                 title: "Política de Privacidad",
-                content: `...` // contenido truncado aquí por brevedad; conserva el original en tu repo
+                content: "<p>Contenido de Política de Privacidad</p>"
             },
             legal: {
                 title: "Aviso Legal",
-                content: `...`
+                content: "<p>Contenido de Aviso Legal</p>"
             },
             cookies: {
                 title: "Política de Cookies",
-                content: `...`
+                content: "<p>Contenido de Política de Cookies</p>"
             }
         };
 
@@ -518,58 +495,36 @@
             modal.classList.add('hidden');
         }
 
-        document.querySelectorAll('.policy-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const policyType = this.getAttribute('data-policy');
-                openModal(policyType);
-            });
-        });
+        // NUEVA FUNCIÓN: Actualizar campos según SELECT
+        function updateContactFields(method) {
+            const fieldNombre = document.getElementById('fieldNombre');
+            const fieldTelefono = document.getElementById('fieldTelefono');
+            const fieldEmail = document.getElementById('fieldEmail');
 
-        // --- NUEVA LÓGICA: activar/desactivar campos según SELECT ---
-        function updateContactFields() {
-            const select = document.getElementById('contact_preference');
-            const name = document.getElementById('name');
-            const phone = document.getElementById('phone');
-            const email = document.getElementById('email');
+            const inputNombre = document.getElementById('nombre');
+            const inputTelefono = document.getElementById('telefono');
+            const inputEmail = document.getElementById('email');
 
-            const value = select ? select.value : '';
+            // 1. Ocultar todo
+            fieldNombre.classList.add('hidden');
+            fieldTelefono.classList.add('hidden');
+            fieldEmail.classList.add('hidden');
 
-            // reset: disable all
-            function disableField(el) {
-                el.setAttribute('disabled', 'disabled');
-                el.classList.add('input-disabled');
-                el.classList.remove('bg-white', 'text-gray-900');
-                el.classList.add('bg-gray-100', 'text-gray-400');
-                el.removeAttribute('required');
-            }
-            function enableField(el) {
-                el.removeAttribute('disabled');
-                el.classList.remove('input-disabled', 'bg-gray-100', 'text-gray-400');
-                el.classList.add('bg-white', 'text-gray-900');
-            }
-
-            // Start by disabling all (will enable needed ones)
-            disableField(name);
-            disableField(phone);
-            disableField(email);
-
-            if (value === 'phone' || value === 'whatsapp') {
-                enableField(name);
-                enableField(phone);
-                name.setAttribute('required', 'required');
-                phone.setAttribute('required', 'required');
-            } else if (value === 'email') {
-                enableField(name);
-                enableField(email);
-                name.setAttribute('required', 'required');
-                email.setAttribute('required', 'required');
-            } else {
-                // If placeholder / no selection: keep all disabled
+            // 2. Mostrar según el método elegido
+            if (method === 'Telefono' || method === 'WhatsApp') {
+                fieldNombre.classList.remove('hidden');
+                inputNombre.focus();
+                
+                fieldTelefono.classList.remove('hidden');
+            } else if (method === 'Email') {
+                fieldNombre.classList.remove('hidden');
+                inputNombre.focus();
+                
+                fieldEmail.classList.remove('hidden');
             }
         }
 
-        // 4. Lógica de Traducción (actualizada para mantener select y placeholders)
+        // LÓGICA DE TRADUCCIÓN
         function applyTranslations(lang) {
             const t = translations[lang];
 
@@ -582,16 +537,8 @@
                 }
             });
 
-            // Update placeholders (if needed)
-            const nameInput = document.getElementById('name');
-            const phoneInput = document.getElementById('phone');
-            const emailInput = document.getElementById('email');
-            if (nameInput) nameInput.placeholder = t.placeholder_name || '';
-            if (phoneInput) phoneInput.placeholder = t.placeholder_phone || '';
-            if (emailInput) emailInput.placeholder = t.placeholder_email || '';
-
             // Opciones de Select
-            const contactSelect = document.getElementById('contact_preference');
+            const contactSelect = document.getElementById('contact_method');
             if (contactSelect) {
                 contactSelect.options[0].textContent = t.placeholder_contact_pref;
                 contactSelect.options[1].textContent = t.option_phone;
@@ -618,11 +565,10 @@
             applyTranslations(lang);
             updateLangButtons(lang);
             lucide.createIcons();
-            // run contact update to keep placeholders/states coherent
             updateContactFields();
         }
 
-        // 5. Lógica de Formulario (mantengo tu flujo de envío)
+        // LÓGICA DE FORMULARIO
         async function submitForm(event) {
             event.preventDefault();
             const form = document.getElementById('main-form');
@@ -632,7 +578,7 @@
             document.getElementById('message-view').classList.add('hidden-view');
             document.getElementById('form-view').classList.remove('hidden-view');
 
-            const sendingText = currentLang === 'ca' ? translations.ca.form_sending : translations.es.form_sending;
+            const sendingText = translations[currentLang].form_sending;
             btn.disabled = true;
             btn.innerHTML = `<span class="spinner"></span> <span>${sendingText}</span>`;
 
@@ -642,6 +588,8 @@
             formObject['_subject'] = 'Nuevo Lead BDiR Maresme - Landing Page';
             formObject['_captcha'] = 'false';
             formObject['_template'] = 'table';
+            formObject['Origen'] = 'Landing EP';
+            formObject['Idioma'] = currentLang;
 
             try {
                 const response = await fetch(FORM_URL, {
@@ -653,7 +601,6 @@
                 if (response.ok) {
                     showSuccess();
                     form.reset();
-                    // after reset, re-disable fields until select chosen
                     updateContactFields();
                 } else {
                     showError();
@@ -715,21 +662,18 @@
             }, 5000);
         }
 
-        // Eventos y carga inicial
+        // EVENTOS Y CARGA INICIAL
         window.addEventListener('DOMContentLoaded', () => {
-            // apply language & translations
             changeLanguage(currentLang);
 
-            // ensure select change updates fields
-            const contactSelect = document.getElementById('contact_preference');
+            const contactSelect = document.getElementById('contact_method');
             if (contactSelect) {
-                contactSelect.addEventListener('change', updateContactFields);
+                contactSelect.addEventListener('change', function() {
+                    updateContactFields(this.value);
+                });
             }
 
-            // set initial state (disable inputs until selection)
             updateContactFields();
-
-            // render icons once more
             lucide.createIcons();
         });
     </script>
